@@ -35,8 +35,7 @@
     },
     {
       "type": "input_value",
-      "name": "condition",
-      "check": "Boolean"
+      "name": "condition"
     }
   ],
   "previousStatement": null,
@@ -392,8 +391,7 @@
     },
     {
       "type": "input_value",
-      "name": "condition",
-      "check": "Boolean"
+      "name": "condition"
     },
     {
       "type": "input_statement",
@@ -485,7 +483,7 @@
       "name": "runningTimes",
       "value": 1000,
       "min": 0,
-      "max": 1999
+      "max": 99999999
     },
     {
       "type": "field_dropdown",
@@ -564,7 +562,6 @@
     {
       "type": "input_value",
       "name": "condition",
-      "check": "Boolean",
       "align": "RIGHT"
     },
     {
@@ -585,7 +582,6 @@
     {
       "type": "input_value",
       "name": "condition",
-      "check": "Boolean",
       "align": "RIGHT"
     },
     {
@@ -696,6 +692,108 @@
   ],
   "output": "Number",
   "colour": 0,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "logic_comparison",
+  "message0": "%1 %2 %3 %4",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "left"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "operator",
+      "options": [
+        [
+          "==",
+          "EQ"
+        ],
+        [
+          "!=",
+          "NEQ"
+        ],
+        [
+          "<",
+          "LT"
+        ],
+        [
+          "<=",
+          "LTEQ"
+        ],
+        [
+          ">",
+          "GT"
+        ],
+        [
+          ">=",
+          "GTEQ"
+        ]
+      ]
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "right"
+    }
+  ],
+  "inputsInline": true,
+  "output": "Number",
+  "colour": 210,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "logic_operators",
+  "message0": "%1 %2 %3 %4",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "left"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "operator",
+      "options": [
+        [
+          "&&",
+          "AND"
+        ],
+        [
+          "||",
+          "OR"
+        ]
+      ]
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "right"
+    }
+  ],
+  "inputsInline": true,
+  "output": "Number",
+  "colour": 210,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "logic_negation",
+  "message0": "not %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "value"
+    }
+  ],
+  "output": "Number",
+  "colour": 210,
   "tooltip": "",
   "helpUrl": ""
 }]

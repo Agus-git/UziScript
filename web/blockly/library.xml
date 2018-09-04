@@ -58,7 +58,7 @@
           </block>
         </statement>
         <value name="TYPE">
-          <block type="type_boolean" id="]`cpVD_WYQNGb%8/`}.["></block>
+          <block type="type_null" id="o7JD)=H)}/FirD!-,G-T"></block>
         </value>
       </block>
     </statement>
@@ -774,7 +774,7 @@
           </block>
         </statement>
         <value name="TYPE">
-          <block type="type_boolean" id="]`cpVD_WYQNGb%8/`}.["></block>
+          <block type="type_null" id="EU2!3)]g$MwZ;n,(?thx"></block>
         </value>
         <next>
           <block type="input_statement" id="VkF$r;J},v/NW8)N+AR@">
@@ -988,7 +988,7 @@
                     <field name="VALUE">1000</field>
                     <field name="FIELDNAME">runningTimes</field>
                     <field name="MIN">0</field>
-                    <field name="MAX">1999</field>
+                    <field name="MAX">99999999</field>
                     <field name="PRECISION">0</field>
                     <next>
                       <block type="field_static" id="5Os=.nKK37k.}s,o:Fwd">
@@ -1132,7 +1132,6 @@
         </statement>
         <value name="TYPE">
           <shadow type="type_null" id="pOCcpmAIBPDm{O77cfF."></shadow>
-          <block type="type_boolean" id="J5P=Ly;!p!|NG]gX81dX"></block>
         </value>
         <next>
           <block type="input_statement" id="$D[jaR1zi/#n[YYH~1dw">
@@ -1188,7 +1187,6 @@
         </statement>
         <value name="TYPE">
           <shadow type="type_null" id="pOCcpmAIBPDm{O77cfF."></shadow>
-          <block type="type_boolean" id="J5P=Ly;!p!|NG]gX81dX"></block>
         </value>
         <next>
           <block type="input_statement" id="$D[jaR1zi/#n[YYH~1dw">
@@ -1316,6 +1314,166 @@
       <block type="colour_hue" id="Sq}g)];`5szQ@iM_~756">
         <mutation colour="#a55b5b"></mutation>
         <field name="HUE">0</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="iWjL^505;B]TjrJIrwz]" x="10" y="10">
+    <mutation connections="LEFT"></mutation>
+    <field name="NAME">logic_comparison</field>
+    <field name="INLINE">INT</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_value" id="V)wk2TZn`o{AXOV6ld1-">
+        <field name="INPUTNAME">left</field>
+        <field name="ALIGN">LEFT</field>
+        <value name="TYPE">
+          <shadow type="type_null" id="L-JSY4XLB{=o9*2*eo3j"></shadow>
+        </value>
+        <next>
+          <block type="input_dummy" id="Dz+T;2cS|9c]mFsz+3+i">
+            <field name="ALIGN">LEFT</field>
+            <statement name="FIELDS">
+              <block type="field_dropdown" id="5KLcZ}R+95qODD1g0,MW">
+                <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                <field name="FIELDNAME">operator</field>
+                <field name="USER0">==</field>
+                <field name="CPU0">EQ</field>
+                <field name="USER1">!=</field>
+                <field name="CPU1">NEQ</field>
+                <field name="USER2">&lt;</field>
+                <field name="CPU2">LT</field>
+                <field name="USER3">&lt;=</field>
+                <field name="CPU3">LTEQ</field>
+                <field name="USER4">&gt;</field>
+                <field name="CPU4">GT</field>
+                <field name="USER5">&gt;=</field>
+                <field name="CPU5">GTEQ</field>
+              </block>
+            </statement>
+            <next>
+              <block type="input_value" id=")m7u#@%kbs~+7KOWrIIU">
+                <field name="INPUTNAME">right</field>
+                <field name="ALIGN">LEFT</field>
+                <value name="TYPE">
+                  <shadow type="type_null" id="d?_Xy3c@PvhYs_Tc{vOd"></shadow>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="j`xbt$jVPjks0bpC#EMe">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="32vy(S=)5k8r))L/GQ]B">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <block type="type_number" id="}NgzvB$legPKrNze_tzZ"></block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="I=q#SivsUI}T-h8Do4RK">
+        <mutation colour="#5b80a5"></mutation>
+        <field name="HUE">210</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="iWjL^505;B]TjrJIrwz]" x="10" y="10">
+    <mutation connections="LEFT"></mutation>
+    <field name="NAME">logic_operators</field>
+    <field name="INLINE">INT</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_value" id="V)wk2TZn`o{AXOV6ld1-">
+        <field name="INPUTNAME">left</field>
+        <field name="ALIGN">LEFT</field>
+        <value name="TYPE">
+          <shadow type="type_null" id="L-JSY4XLB{=o9*2*eo3j"></shadow>
+        </value>
+        <next>
+          <block type="input_dummy" id="Dz+T;2cS|9c]mFsz+3+i">
+            <field name="ALIGN">LEFT</field>
+            <statement name="FIELDS">
+              <block type="field_dropdown" id="5KLcZ}R+95qODD1g0,MW">
+                <mutation options="[&quot;text&quot;,&quot;text&quot;]"></mutation>
+                <field name="FIELDNAME">operator</field>
+                <field name="USER0">&amp;&amp;</field>
+                <field name="CPU0">AND</field>
+                <field name="USER1">||</field>
+                <field name="CPU1">OR</field>
+              </block>
+            </statement>
+            <next>
+              <block type="input_value" id=")m7u#@%kbs~+7KOWrIIU">
+                <field name="INPUTNAME">right</field>
+                <field name="ALIGN">LEFT</field>
+                <value name="TYPE">
+                  <shadow type="type_null" id="d?_Xy3c@PvhYs_Tc{vOd"></shadow>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="j`xbt$jVPjks0bpC#EMe">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="32vy(S=)5k8r))L/GQ]B">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <block type="type_number" id="}NgzvB$legPKrNze_tzZ"></block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="I=q#SivsUI}T-h8Do4RK">
+        <mutation colour="#5b80a5"></mutation>
+        <field name="HUE">210</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="iWjL^505;B]TjrJIrwz]" x="10" y="10">
+    <mutation connections="LEFT"></mutation>
+    <field name="NAME">logic_negation</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_value" id="V)wk2TZn`o{AXOV6ld1-">
+        <field name="INPUTNAME">value</field>
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="NWMyV){]bBp93m4SgNL[">
+            <field name="TEXT">not</field>
+          </block>
+        </statement>
+        <value name="TYPE">
+          <shadow type="type_null" id="L-JSY4XLB{=o9*2*eo3j"></shadow>
+        </value>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="j`xbt$jVPjks0bpC#EMe">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="32vy(S=)5k8r))L/GQ]B">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <block type="type_number" id="}NgzvB$legPKrNze_tzZ"></block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="I=q#SivsUI}T-h8Do4RK">
+        <mutation colour="#5b80a5"></mutation>
+        <field name="HUE">210</field>
       </block>
     </value>
   </block></xml>
