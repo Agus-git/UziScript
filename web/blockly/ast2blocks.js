@@ -183,19 +183,25 @@ var ASTToBlocks = (function () {
 		UziWhileNode: function (json, ctx) {
 			var node = create("block");
 			node.setAttribute("id", json.id);
-			node.setAttribute("type", "repeat");
+			var empty = json.post.statements.length == 0;
+			node.setAttribute("type", empty ? "wait" : "repeat");
 			appendField(node, "negate", json.negated);
 			appendValue(node, "condition", generateXMLFor(json.condition, ctx));
-			appendStatements(node, "statements", json.post, ctx);
+			if (!empty) {
+				appendStatements(node, "statements", json.post, ctx);
+			}
 			return node;
 		},
 		UziUntilNode: function (json, ctx) {
 			var node = create("block");
 			node.setAttribute("id", json.id);
-			node.setAttribute("type", "repeat");
+			var empty = json.post.statements.length == 0;
+			node.setAttribute("type", empty ? "wait" : "repeat");
 			appendField(node, "negate", json.negated);
 			appendValue(node, "condition", generateXMLFor(json.condition, ctx));
-			appendStatements(node, "statements", json.post, ctx);
+			if (!empty) {
+				appendStatements(node, "statements", json.post, ctx);
+			}
 			return node;
 		},
 		UziForNode: function (json, ctx) {
@@ -237,19 +243,19 @@ var ASTToBlocks = (function () {
 		UziLogicalOrNode: function (json, ctx) {
 			var node = create("block");
 			node.setAttribute("id", json.id);
-			node.setAttribute("type", "logic_operation");
-			appendField(node, "OP", "OR");
-			appendValue(node, "A", generateXMLFor(json.left, ctx));
-			appendValue(node, "B", generateXMLFor(json.right, ctx));
+			node.setAttribute("type", "logic_operators");
+			appendField(node, "operator", "OR");
+			appendValue(node, "left", generateXMLFor(json.left, ctx));
+			appendValue(node, "right", generateXMLFor(json.right, ctx));
 			return node;
 		},
 		UziLogicalAndNode: function (json, ctx) {
 			var node = create("block");
 			node.setAttribute("id", json.id);
-			node.setAttribute("type", "logic_operation");
-			appendField(node, "OP", "AND");
-			appendValue(node, "A", generateXMLFor(json.left, ctx));
-			appendValue(node, "B", generateXMLFor(json.right, ctx));
+			node.setAttribute("type", "logic_operators");
+			appendField(node, "operator", "AND");
+			appendValue(node, "left", generateXMLFor(json.left, ctx));
+			appendValue(node, "right", generateXMLFor(json.right, ctx));
 			return node;
 		},
 		UziReturnNode: function (json, ctx) {
@@ -409,38 +415,38 @@ var ASTToBlocks = (function () {
 			appendValue(node, "A", generateXMLFor(args[0], ctx));
 			appendValue(node, "B", generateXMLFor(args[1], ctx));
 		} else if (selector === "==") {
-			node.setAttribute("type", "logic_compare");
-			appendField(node, "OP", "EQ");
-			appendValue(node, "A", generateXMLFor(args[0], ctx));
-			appendValue(node, "B", generateXMLFor(args[1], ctx));
+			node.setAttribute("type", "logic_comparison");
+			appendField(node, "operator", "EQ");
+			appendValue(node, "left", generateXMLFor(args[0], ctx));
+			appendValue(node, "right", generateXMLFor(args[1], ctx));
 		} else if (selector === "!=") {
-			node.setAttribute("type", "logic_compare");
-			appendField(node, "OP", "NEQ");
-			appendValue(node, "A", generateXMLFor(args[0], ctx));
-			appendValue(node, "B", generateXMLFor(args[1], ctx));
+			node.setAttribute("type", "logic_comparison");
+			appendField(node, "operator", "NEQ");
+			appendValue(node, "left", generateXMLFor(args[0], ctx));
+			appendValue(node, "right", generateXMLFor(args[1], ctx));
 		} else if (selector === "<=") {
-			node.setAttribute("type", "logic_compare");
-			appendField(node, "OP", "LTE");
-			appendValue(node, "A", generateXMLFor(args[0], ctx));
-			appendValue(node, "B", generateXMLFor(args[1], ctx));
+			node.setAttribute("type", "logic_comparison");
+			appendField(node, "operator", "LTEQ");
+			appendValue(node, "left", generateXMLFor(args[0], ctx));
+			appendValue(node, "right", generateXMLFor(args[1], ctx));
 		} else if (selector === "<") {
-			node.setAttribute("type", "logic_compare");
-			appendField(node, "OP", "LT");
-			appendValue(node, "A", generateXMLFor(args[0], ctx));
-			appendValue(node, "B", generateXMLFor(args[1], ctx));
+			node.setAttribute("type", "logic_comparison");
+			appendField(node, "operator", "LT");
+			appendValue(node, "left", generateXMLFor(args[0], ctx));
+			appendValue(node, "right", generateXMLFor(args[1], ctx));
 		} else if (selector === ">=") {
-			node.setAttribute("type", "logic_compare");
-			appendField(node, "OP", "GTE");
-			appendValue(node, "A", generateXMLFor(args[0], ctx));
-			appendValue(node, "B", generateXMLFor(args[1], ctx));
+			node.setAttribute("type", "logic_comparison");
+			appendField(node, "operator", "GTEQ");
+			appendValue(node, "left", generateXMLFor(args[0], ctx));
+			appendValue(node, "right", generateXMLFor(args[1], ctx));
 		} else if (selector === ">") {
-			node.setAttribute("type", "logic_compare");
-			appendField(node, "OP", "GT");
-			appendValue(node, "A", generateXMLFor(args[0], ctx));
-			appendValue(node, "B", generateXMLFor(args[1], ctx));
+			node.setAttribute("type", "logic_comparison");
+			appendField(node, "operator", "GT");
+			appendValue(node, "left", generateXMLFor(args[0], ctx));
+			appendValue(node, "right", generateXMLFor(args[1], ctx));
 		} else if (selector === "!") {
-			node.setAttribute("type", "logic_negate");
-			appendValue(node, "BOOL", generateXMLFor(args[0], ctx));
+			node.setAttribute("type", "logic_negation");
+			appendValue(node, "value", generateXMLFor(args[0], ctx));
 		} else if (selector === "isEven") {
 			node.setAttribute("type", "math_number_property");
 			var mut = create("mutation");

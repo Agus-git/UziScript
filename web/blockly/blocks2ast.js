@@ -317,11 +317,11 @@ var BlocksToAST = (function () {
 			var falseBranch = generateCodeForStatements(block, ctx, "falseBranch");
 			return builder.conditional(id, condition, trueBranch, falseBranch);
 		},
-		logic_compare: function (block, ctx) {
+		logic_comparison: function (block, ctx) {
 			var id = getId(block);
-			var type = getChildNode(block, "OP").innerText;
-			var left = generateCodeForValue(block, ctx, "A");
-			var right = generateCodeForValue(block, ctx, "B");
+			var type = getChildNode(block, "operator").innerText;
+			var left = generateCodeForValue(block, ctx, "left");
+			var right = generateCodeForValue(block, ctx, "right");
 			var selector, primName;
 			if (type === "EQ") {
 				selector = "==";
@@ -332,10 +332,10 @@ var BlocksToAST = (function () {
 			} else if (type === "LT") {
 				selector = "<";
 				primName = "lessThan";
-			} else if (type === "LTE") {
+			} else if (type === "LTEQ") {
 				selector = "<=";
 				primName = "lessThanOrEquals";
-			} else if (type === "GTE") {
+			} else if (type === "GTEQ") {
 				selector = ">=";
 				primName = "greaterThanOrEquals";
 			} else if (type === "GT") {
@@ -367,11 +367,11 @@ var BlocksToAST = (function () {
 			var pinNumber = generateCodeForValue(block, ctx, "pinNumber");
 			return builder.primitiveCall(id, "toggle", [pinNumber]);
 		},
-		logic_operation: function (block, ctx) {
+		logic_operators: function (block, ctx) {
 			var id = getId(block);
-			var type = getChildNode(block, "OP").innerText;
-			var left = generateCodeForValue(block, ctx, "A");
-			var right = generateCodeForValue(block, ctx, "B");
+			var type = getChildNode(block, "operator").innerText;
+			var left = generateCodeForValue(block, ctx, "left");
+			var right = generateCodeForValue(block, ctx, "right");
 			if (type === "AND") {
 				return builder.logicalAnd(id, left, right);
 			} else if (type === "OR") {
@@ -383,9 +383,9 @@ var BlocksToAST = (function () {
 			var bool = getChildNode(block, "BOOL").innerText;
 			return builder.number(id, bool === "TRUE" ? 1 : 0);
 		},
-		logic_negate: function (block, ctx) {
+		logic_negation: function (block, ctx) {
 			var id = getId(block);
-			var bool = generateCodeForValue(block, ctx, "BOOL");
+			var bool = generateCodeForValue(block, ctx, "value");
 			return builder.primitiveCall(id, "!", [bool], "negate");
 		},
 		math_number_property: function (block, ctx) {
