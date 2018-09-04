@@ -51,8 +51,20 @@ var ASTToBlocks = (function () {
 				mut.appendChild(argNode);
 			});
 			node.appendChild(mut);			
-			appendField(node, "NAME", json.name);
+			appendField(node, "NAME", json.name);			
+			var last = json.body.statements.pop();
+			var returnValue;
+			if (last !== undefined && last.__class__ === "UziReturnNode") {				
+				returnValue = generateXMLFor(last.value, ctx);
+			} else {
+				if (last !== undefined) { json.body.statements.push(last); }
+				returnValue = create("block");
+				returnValue.setAttribute("id", json.id);
+				returnValue.setAttribute("type", "math_number");
+				appendField(returnValue, "NUM", 0);
+			}			
 			appendStatements(node, "STACK", json.body, ctx);
+			appendValue(node, "RETURN", returnValue);
 			return node;
 		},
 		UziCallNode: function (json, ctx) {
