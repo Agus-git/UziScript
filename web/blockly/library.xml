@@ -1373,7 +1373,7 @@
       </block>
     </value>
     <value name="OUTPUTTYPE">
-      <block type="type_number" id="}NgzvB$legPKrNze_tzZ"></block>
+      <block type="type_boolean" id="=l{2uVZw/*B5f*#S29p%"></block>
     </value>
     <value name="COLOUR">
       <block type="colour_hue" id="I=q#SivsUI}T-h8Do4RK">
@@ -1430,7 +1430,7 @@
       </block>
     </value>
     <value name="OUTPUTTYPE">
-      <block type="type_number" id="}NgzvB$legPKrNze_tzZ"></block>
+      <block type="type_boolean" id="{H*hLENJ-^7vYBFP%z^:"></block>
     </value>
     <value name="COLOUR">
       <block type="colour_hue" id="I=q#SivsUI}T-h8Do4RK">
@@ -1468,7 +1468,7 @@
       </block>
     </value>
     <value name="OUTPUTTYPE">
-      <block type="type_number" id="}NgzvB$legPKrNze_tzZ"></block>
+      <block type="type_boolean" id="a0;j[bmgweIU)2QoEw5d"></block>
     </value>
     <value name="COLOUR">
       <block type="colour_hue" id="I=q#SivsUI}T-h8Do4RK">

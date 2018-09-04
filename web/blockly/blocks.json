@@ -742,7 +742,7 @@
     }
   ],
   "inputsInline": true,
-  "output": "Number",
+  "output": "Boolean",
   "colour": 210,
   "tooltip": "",
   "helpUrl": ""
@@ -778,7 +778,7 @@
     }
   ],
   "inputsInline": true,
-  "output": "Number",
+  "output": "Boolean",
   "colour": 210,
   "tooltip": "",
   "helpUrl": ""
@@ -792,7 +792,7 @@
       "name": "value"
     }
   ],
-  "output": "Number",
+  "output": "Boolean",
   "colour": 210,
   "tooltip": "",
   "helpUrl": ""
