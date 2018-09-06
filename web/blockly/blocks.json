@@ -796,4 +796,26 @@
   "colour": 210,
   "tooltip": "",
   "helpUrl": ""
+},
+{
+  "type": "return",
+  "message0": "return",
+  "previousStatement": null,
+  "colour": 285,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "return_value",
+  "message0": "return %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "value"
+    }
+  ],
+  "previousStatement": null,
+  "colour": 285,
+  "tooltip": "",
+  "helpUrl": ""
 }]
