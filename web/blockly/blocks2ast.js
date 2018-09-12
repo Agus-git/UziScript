@@ -660,9 +660,6 @@ var BlocksToAST = (function () {
 			var statements = generateCodeForStatements(block, ctx, "STACK");
 			return builder.procedure(id, name, args, statements);
 		},
-		comment_statement: function (block, ctx) {
-			return undefined;
-		},
 		procedures_callnoreturn: function (block, ctx) {
 			var id = getId(block);
 			var mutation = getLastChild(block, function (child) {
@@ -680,54 +677,6 @@ var BlocksToAST = (function () {
 				args.push({ name: name, value: value });
 			}
 			return builder.scriptCall(id, scriptName, args);
-		},
-		procedures_callreturn: function (block, ctx) {
-			var id = getId(block);
-			var mutation = getLastChild(block, function (child) {
-				return child.tagName === "MUTATION";
-			});
-			var scriptName = "_" + asIdentifier(mutation.getAttribute("name"));
-			var argNames = [];
-			mutation.childNodes.forEach(function (each) {
-				argNames.push(asIdentifier(each.getAttribute("name")));
-			});
-			var args = [];
-			for (var i = 0; i < argNames.length; i++) {
-				var value = generateCodeForValue(block, ctx, "ARG" + i);
-				var name = argNames[i];
-				args.push({ name: name, value: value });
-			}
-			return builder.scriptCall(id, scriptName, args);
-		},
-		procedures_ifreturn: function (block, ctx) {
-			var id = getId(block);
-			var condition = generateCodeForValue(block, ctx, "CONDITION");
-			var value = generateCodeForValue(block, ctx, "VALUE");
-			return builder.conditional(id, 
-				condition, 
-				[builder.return(id, value || null)], 
-				[]);
-		},
-		procedures_defreturn: function (block, ctx) {
-			var id = getId(block);
-			var name = "_" + asIdentifier(getChildNode(block, "NAME").innerText);
-			var mutation = getLastChild(block, function (child) {
-				return child.tagName === "MUTATION";
-			});
-			var args = [];
-			if (mutation !== undefined) {
-				mutation.childNodes.forEach(function (each) {
-					args.push(asIdentifier(each.getAttribute("name")));
-				});
-			}
-			var statements = generateCodeForStatements(block, ctx, "STACK");
-			// TODO(Richo): Decide what to do if the return block is not defined
-			var returnExpr = generateCodeForValue(block, ctx, "RETURN");
-			statements.push(builder.return(id, returnExpr));
-			return builder.function(id, name, args, statements);
-		},
-		comment_expression: function (block, ctx) {
-			return generateCodeForValue(block, ctx, "NAME");
 		},
 		pin: function (block, ctx) {
 			var id = getId(block);
