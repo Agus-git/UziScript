@@ -288,7 +288,7 @@
     <block type="math_random_float"></block>
   </category>
   <category name="Variables" colour="#A65C81" custom="VARIABLE"></category>
-  <category name="Functions" colour="#805ba5">
+  <category name="Functions_custom" colour="#805ba5">
     <block type="procedures_defnoreturn">
       <field name="NAME">do something</field>
       <comment pinned="false" h="80" w="160">Describe this function...</comment>
@@ -297,4 +297,5 @@
     <block type="return_value"></block>
   </category>
   <sep></sep>
+  <category name="Functions" colour="#9A5CA6" custom="PROCEDURE"></category>
 </xml>
