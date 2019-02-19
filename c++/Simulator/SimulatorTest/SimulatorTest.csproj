@@ -81,6 +81,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ArduinoTestFiles\Test001Toggle8" />
+    <None Include="ArduinoTestFiles\Test002Toggle9" />
+    <None Include="ArduinoTestFiles\Test003Toggle10" />
+    <None Include="ArduinoTestFiles\Test004Toggle11" />
+    <None Include="ArduinoTestFiles\Test005Toggle12" />
+    <None Include="ArduinoTestFiles\Test006Toggle2000ms" />
+    <None Include="ArduinoTestFiles\Test007Toggle500ms" />
+    <None Include="ArduinoTestFiles\Test008Toggle10ms" />
+    <None Include="ArduinoTestFiles\Test009PrimitiveYieldTime" />
+    <None Include="ArduinoTestFiles\Test010ResumeOnAPausedTaskShouldContinueFromItsCurrentPC" />
+    <None Include="ArduinoTestFiles\Test011ForLoopShouldOnlyEvaluateStepOncePerIteration" />
+    <None Include="ArduinoTestFiles\Test012TwoBlinksWithDifferentTickrate" />
+    <None Include="ArduinoTestFiles\Test013CaptureEveryPinWithDifferentTickrate" />
     <None Include="TestFiles\Test033StopCurrentScriptShouldStopImmediatelyAndPCShouldReturnToTheStart" />
     <None Include="TestFiles\Test089DebuggerBreakpointHaltsAllScripts" />
     <None Include="TestFiles\Test090DebuggerBreakpointHaltsAreDeterministic" />
