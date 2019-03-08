@@ -73,6 +73,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestBench.cs" />
     <Compile Include="UziConnection.cs" />
+    <Compile Include="UziProtocol\IncomingMessages.cs" />
+    <Compile Include="UziProtocol\OutgoingMessages.cs" />
+    <Compile Include="UziProtocol\Protocol.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Simulator\Simulator.csproj">
