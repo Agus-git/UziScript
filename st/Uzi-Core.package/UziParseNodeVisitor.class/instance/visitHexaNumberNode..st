@@ -1,0 +1,3 @@
+visiting
+visitHexaNumberNode: node
+	self subclassResponsibility
