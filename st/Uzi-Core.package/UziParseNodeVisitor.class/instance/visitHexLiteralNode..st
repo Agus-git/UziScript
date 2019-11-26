@@ -1,3 +1,3 @@
 visiting
-visitHexaNumberNode: node
+visitHexLiteralNode: node
 	self subclassResponsibility

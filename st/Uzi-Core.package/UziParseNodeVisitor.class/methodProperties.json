@@ -10,7 +10,7 @@
 		"visitConditionalNode:" : "Richo 11/5/2019 16:11",
 		"visitForNode:" : "Richo 11/5/2019 16:11",
 		"visitForeverNode:" : "Richo 11/5/2019 16:11",
-		"visitHexaNumberNode:" : "Richo 11/21/2019 17:04",
+		"visitHexLiteralNode:" : "Richo 11/26/2019 14:50",
 		"visitImportNode:" : "Richo 11/5/2019 20:40",
 		"visitLogicalAndNode:" : "Richo 11/5/2019 16:11",
 		"visitLogicalOrNode:" : "Richo 11/5/2019 16:11",
