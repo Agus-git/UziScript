@@ -1,5 +1,13 @@
 as yet unclassified
 convertHexToDec: char
+| digits |
+
+	digits := '0123456789abcdef'.
+	"recibo un char y me ifjo si esta en el string y devuelvo el indice del string-1xd"
+	"1 to: digits size do:[:i| (char = (digits at: i)) ifTrue:[^i - 1]]"
+	^ (digits indexOf: char asLowercase) - 1. 
+"	
+	
 	char = $a ifTrue: [^10].
 	char = $b ifTrue: [^11].
 	char = $c ifTrue: [^12].
@@ -15,5 +23,5 @@ convertHexToDec: char
 	char = $6 ifTrue: [^6].
 	char = $7 ifTrue: [^7].
 	char = $8 ifTrue: [^8].
-	char = $9 ifTrue: [^9].
+	char = $9 ifTrue: [^9]."
 	

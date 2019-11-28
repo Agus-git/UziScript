@@ -1,5 +1,9 @@
 grammar-separators
 hexLetters
 
-	^$a asParser / $b asParser/ $c asParser/ $d asParser/ $e asParser/ $f asParser
-	
+	^$a asParser caseInsensitive 
+	/ $b asParser caseInsensitive
+	/ $c asParser caseInsensitive
+	/ $d asParser caseInsensitive
+	/ $e asParser caseInsensitive
+	/ $f asParser caseInsensitive
