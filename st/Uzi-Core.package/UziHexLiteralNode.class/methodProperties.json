@@ -1,11 +1,6 @@
 {
 	"class" : {
-		"value:" : "Richo 11/21/2019 17:34" },
+		 },
 	"instance" : {
-		"accept:" : "Richo 11/26/2019 14:49",
-		"children" : "Richo 11/21/2019 17:05",
-		"convertHexToDec:" : "Richo 11/28/2019 16:59",
-		"initializeWith:" : "Richo 11/21/2019 17:20",
-		"isBinaryNode" : "Richo 11/21/2019 17:07",
-		"isExpression" : "Richo 11/21/2019 17:05",
-		"value" : "Richo 11/26/2019 16:40" } }
+		"convertHexToDec:" : "Richo 12/10/2019 15:13",
+		"value" : "Richo 12/12/2019 13:52" } }

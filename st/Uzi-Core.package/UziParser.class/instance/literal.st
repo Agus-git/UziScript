@@ -1,3 +1,3 @@
 grammar-literals
 literal
-	^ constant / number
+	^ constant / hexNumber / number

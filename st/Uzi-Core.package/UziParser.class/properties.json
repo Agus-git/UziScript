@@ -59,7 +59,8 @@
 		"argument",
 		"unary",
 		"primitive",
-		"hexLetters" ],
+		"hexLetters",
+		"hexNumber" ],
 	"name" : "UziParser",
 	"pools" : [
 		 ],

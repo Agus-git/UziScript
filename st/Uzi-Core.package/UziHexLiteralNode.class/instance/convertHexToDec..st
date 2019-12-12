@@ -3,7 +3,7 @@ convertHexToDec: char
 | digits |
 
 	digits := '0123456789abcdef'.
-	"recibo un char y me ifjo si esta en el string y devuelvo el indice del string-1xd"
+	
 	"1 to: digits size do:[:i| (char = (digits at: i)) ifTrue:[^i - 1]]"
 	^ (digits indexOf: char asLowercase) - 1. 
 "	

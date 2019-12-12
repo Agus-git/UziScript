@@ -6,9 +6,9 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"value" ],
+		 ],
 	"name" : "UziHexLiteralNode",
 	"pools" : [
 		 ],
-	"super" : "UziParseNode",
+	"super" : "UziNumberLiteralNode",
 	"type" : "normal" }
