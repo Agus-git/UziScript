@@ -434,7 +434,7 @@ let UziBlock = (function () {
 
     Blockly.Blocks['forever'] = {
       init: function() {
-        let msg = i18n.translate("repeat forever %1");
+        let msg = i18n.translate("repeat forever %0 %1");
         let inputFields = [
           () => this.appendStatementInput("statements")
                     .setCheck(null)
@@ -565,7 +565,7 @@ let UziBlock = (function () {
 
     Blockly.Blocks['repeat_times'] = {
       init: function() {
-        let msg = i18n.translate("repeat %1 times %2");
+        let msg = i18n.translate("repeat %1 times %0 %2");
         let inputFields = [
           () => this.appendValueInput("times")
                     .setCheck(null),
@@ -870,7 +870,7 @@ let UziBlock = (function () {
 
     Blockly.Blocks['number_modulo'] = {
       init: function() {
-        let msg = i18n.translate("remainder of %1 ÷ %2");
+        let msg = i18n.translate("remainder of %1 ÷ %2 %0");
         let inputFields = [
           () => this.appendValueInput("dividend")
                     .setCheck("Number")
