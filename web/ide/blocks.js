@@ -1503,6 +1503,7 @@ let UziBlock = (function () {
   function initBlock (block, msg, inputFields) {
     // split msg into parts for each input field reference and create
     // corresponding Blockly input
+    inputFields.unshift(() => block.appendDummyInput());
     let inputFieldRefPattern = /%\d+/g;
     let fieldRefMatch;
     let fieldRefNum;
@@ -1510,7 +1511,7 @@ let UziBlock = (function () {
     let previousRefMatchIndex = 0;
     let placeholders = new Set();
     while((fieldRefMatch = inputFieldRefPattern.exec(msg)) != null) {
-        fieldRefNum = parseInt(fieldRefMatch[0].substring(1), 10) -1;
+        fieldRefNum = parseInt(fieldRefMatch[0].substring(1), 10);
         msgUntilFieldRef = trim(msg.substring(previousRefMatchIndex, fieldRefMatch.index));
         previousRefMatchIndex = inputFieldRefPattern.lastIndex;
 
