@@ -191,7 +191,7 @@
     }
 
     function appendMotorRow(i, motor, usedMotors) {
-
+      // TODO(Richo): Refactor!
       function createTextInput(motorName, controlName, validationFn) {
         let input = $("<input>")
           .attr("type", "text")
@@ -284,6 +284,7 @@
       UziBlock.setMotors(data);
       UziBlock.refreshToolbox();
       saveToLocalStorage();
+      scheduleAutorun(true);
     });
 
     $("#blockly-motors-modal-container").on("submit", function (e) {
@@ -348,7 +349,7 @@
     }
 
     function appendSonarRow(i, sonar, usedSonars) {
-
+      // TODO(Richo): Refactor!
       function createTextInput(controlValue, controlName, validationFn) {
         let input = $("<input>")
           .attr("type", "text")
@@ -441,6 +442,7 @@
       UziBlock.setSonars(data);
       UziBlock.refreshToolbox();
       saveToLocalStorage();
+      scheduleAutorun(true);
     });
 
     $("#blockly-sonars-modal-container").on("submit", function (e) {
@@ -505,7 +507,7 @@
     }
 
     function appendJoystickRow(i, joystick, usedJoysticks) {
-
+      // TODO(Richo): Refactor!
       function createTextInput(controlValue, controlName, validationFn) {
         let input = $("<input>")
           .attr("type", "text")
@@ -597,6 +599,7 @@
       UziBlock.setJoysticks(data);
       UziBlock.refreshToolbox();
       saveToLocalStorage();
+      scheduleAutorun(true);
     });
 
     $("#blockly-joysticks-modal-container").on("submit", function (e) {
@@ -655,6 +658,20 @@
 
     function appendVariableRow(i, variable, usedVariables) {
 
+      function createNumberInput(controlValue, controlName, validationFn) {
+        let input = $("<input>")
+          .attr("type", "number")
+          .addClass("form-control")
+          .addClass("text-center")
+          .css("padding-right", "initial") // Fix for weird css alignment issue when is-invalid
+          .attr("name", controlName);
+        if (validationFn != undefined) {
+          input.on("keyup", validationFn);
+        }
+        input.get(0).value = controlValue;
+        return input;
+      }
+      // TODO(Richo): Refactor!
       function createTextInput(controlValue, controlName, validationFn) {
         let input = $("<input>")
           .attr("type", "text")
@@ -697,6 +714,7 @@
       let tr = $("<tr>")
         .append($("<input>").attr("type", "hidden").attr("name", "variables[" + i + "][index]").attr("value", i))
         .append($("<td>").append(createTextInput(variable.name, "variables[" + i + "][name]", validateForm)))
+        .append($("<td>").append(createNumberInput(variable.value || "0", "variables[" + i + "][value]")));
       tr.append($("<td>").append(createRemoveButton(tr)));
       $("#blockly-variables-modal-container-tbody").append(tr);
     }
@@ -734,6 +752,7 @@
       UziBlock.setVariables(data);
       UziBlock.refreshToolbox();
       saveToLocalStorage();
+      scheduleAutorun(true);
     });
 
     $("#blockly-variables-modal-container").on("submit", function (e) {
@@ -1242,6 +1261,7 @@
   }
 
   function updateGlobalsPanel() {
+    // TODO(Richo): Old variables no longer present in the program are kept in the panel!
     updateValuesPanel(Uzi.state.globals, $("#globals-table tbody"), $("#no-globals-label"), "global");
   }
 
@@ -1288,6 +1308,10 @@
     if (values.available
         .filter(val => val.reporting)
         .some(val => getElement(val).get(0) == undefined)) {
+      // We have new values to add
+      initializePanel();
+    } else if ($container.children().length > values.available.length) {
+      // We have old values to remove
       initializePanel();
     }
 

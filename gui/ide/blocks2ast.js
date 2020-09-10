@@ -5,8 +5,10 @@ let BlocksToAST = (function () {
 			return {
 				__class__: "UziProgramNode",
 				imports: imports,
-				globals: globals.map(function (varName) {
-					return builder.variableDeclaration(id, varName);
+				globals: globals.map(g => {
+					let name = g.name;
+					let value = g.value ? parseFloat(g.value) : 0;
+					return builder.variableDeclaration(id, name, builder.number(id, value));
 				}),
 				scripts: scripts,
 				primitives: []
@@ -1127,7 +1129,11 @@ let BlocksToAST = (function () {
 	}
 
 	return {
-		generate: function (xml, motors, sonars, joysticks) {
+		/*
+		TODO(Richo): Refactor arguments, maybe merge the motors/sonars/joystick/variables stuff
+		into one object called "metadada" or something?
+		*/
+		generate: function (xml, motors, sonars, joysticks, variables) {
 			let setup = [];
 			let scripts = [];
 			let ctx = {
@@ -1284,7 +1290,7 @@ let BlocksToAST = (function () {
 			}
 			return builder.program(null,
 				Array.from(ctx.imports, entry => entry[1]),
-				ctx.globals,
+				ctx.globals.map(varName => variables.find(v => v.name == varName)),
 				scripts);
 		}
 	}

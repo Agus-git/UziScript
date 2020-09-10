@@ -1911,7 +1911,7 @@ let UziBlock = (function () {
         handleProcedureBlocksEvents(evt);
         handleFunctionBlocksEvents(evt);
         handleVariableDeclarationBlocksEvents(evt);
-        
+
         trigger("change");
       });
 
@@ -2413,18 +2413,26 @@ let UziBlock = (function () {
     let callBlocks = ["proc_call_0args", "proc_call_1args",
                       "proc_call_2args", "proc_call_3args"];
 
-    // NOTE(Richo): If a procedure is renamed we want to update all referencing blocks.
+    /*
+    NOTE(Richo): If a procedure is renamed we want to update all calling blocks.
+    And if a calling block is changed to refer to another procedure we need to update
+    its argument names.
+    */
     if (evt.type == Blockly.Events.CHANGE
        && evt.element == "field"
        && evt.name == "procName") {
       let block = workspace.getBlockById(evt.blockId);
       if (block != undefined && definitionBlocks.includes(block.type)) {
+        // A definition block has changed, we need to update all calling blocks
         let callBlock = callBlocks[definitionBlocks.indexOf(block.type)];
         workspace.getAllBlocks()
           .filter(b => callBlock == b.type)
           .map(b => b.getField("procName"))
           .filter(f => f != undefined && f.getValue() == evt.oldValue)
           .forEach(f => f.setValue(evt.newValue));
+      } else if (block != undefined && callBlocks.includes(block.type)) {
+        // A calling block has changed, we need to update its argument names
+        updateArgumentFields(block);
       }
     }
 
@@ -2438,11 +2446,7 @@ let UziBlock = (function () {
         workspace.getAllBlocks()
           .filter(b => callBlock == b.type &&
                       block.getFieldValue("procName") == b.getFieldValue("procName"))
-          .map(b => b.getInput(evt.name))
-          .filter(i => i != undefined)
-          .forEach(i => i.fieldRow
-            .filter(f => f.class_ == evt.name)
-            .forEach(f => f.setValue(evt.newValue + ":")));
+          .forEach(updateArgumentFields);
       }
     }
   }
@@ -2453,18 +2457,26 @@ let UziBlock = (function () {
     let callBlocks = ["func_call_0args", "func_call_1args",
                       "func_call_2args", "func_call_3args"];
 
-    // NOTE(Richo): If a function is renamed we want to update all referencing blocks.
+    /*
+    NOTE(Richo): If a function is renamed we want to update all calling blocks.
+    And if a calling block is changed to refer to another function we need to update
+    its argument names.
+    */
     if (evt.type == Blockly.Events.CHANGE
        && evt.element == "field"
        && evt.name == "funcName") {
       let block = workspace.getBlockById(evt.blockId);
       if (block != undefined && definitionBlocks.includes(block.type)) {
+        // A definition block has changed, we need to update all calling blocks
         let callBlock = callBlocks[definitionBlocks.indexOf(block.type)];
         workspace.getAllBlocks()
           .filter(b => callBlock == b.type)
           .map(b => b.getField("funcName"))
           .filter(f => f != undefined && f.getValue() == evt.oldValue)
           .forEach(f => f.setValue(evt.newValue));
+      } else if (block != undefined && callBlocks.includes(block.type)) {
+        // A calling block has changed, we need to update its argument names
+        updateArgumentFields(block);
       }
     }
 
@@ -2478,11 +2490,7 @@ let UziBlock = (function () {
         workspace.getAllBlocks()
           .filter(b => callBlock == b.type &&
                       block.getFieldValue("funcName") == b.getFieldValue("funcName"))
-          .map(b => b.getInput(evt.name))
-          .filter(i => i != undefined)
-          .forEach(i => i.fieldRow
-            .filter(f => f.class_ == evt.name)
-            .forEach(f => f.setValue(evt.newValue + ":")));
+          .forEach(updateArgumentFields);
       }
     }
   }
@@ -2516,7 +2524,7 @@ let UziBlock = (function () {
         if (field != undefined) {
           let variableName = field.innerText;
           if (!variables.some(function (g) { return g.name == variableName})) {
-            variables.push({ name: variableName });
+            variables.push({ name: variableName, value: 0 });
           }
         }
       }
@@ -2538,7 +2546,7 @@ let UziBlock = (function () {
             if (field != undefined) {
               let variableName = field.innerText;
               if (!variables.some(function (g) { return g.name == variableName})) {
-                variables.push({ name: variableName });
+                variables.push({ name: variableName, value: 0 });
               }
             }
           });
@@ -2589,7 +2597,7 @@ let UziBlock = (function () {
     // Create new variable, if it doesn't exist yet
     if (!variables.some(v => v.name == newName)) {
       let nextIndex = variables.length == 0 ? 0 : Math.max.apply(null, variables.map(function (v) { return v.index; })) + 1;
-      let newVar = {index: nextIndex, name: newName};
+      let newVar = {index: nextIndex, name: newName, value: 0};
       variables.push(newVar);
     }
 
@@ -2649,9 +2657,27 @@ let UziBlock = (function () {
     });
   }
 
+  /*
+  NOTE(Richo): This function will update the names of the arguments in a calling
+  block according to the script being called. This is useful in several cases:
+  - When the workspace is loaded from XML (because the field labels are not serialized)
+  - When the proc/func being called changes (the user can change the dropdown value)
+  - When the argument is renamed in the definition block
+  */
+  function updateArgumentFields(callBlock) {
+    callBlock.inputList.filter(i => i.name.startsWith("arg"))
+      .forEach(i => {
+        let scriptName = callBlock.getFieldValue("procName") || callBlock.getFieldValue("funcName");
+        let inputName = i.name;
+        i.fieldRow
+          .filter(f => f.class_ == inputName)
+          .forEach(f => f.setValue(getArgumentName(scriptName, inputName)));
+      });
+  }
+
   function getGeneratedCode(){
     let xml = Blockly.Xml.workspaceToDom(workspace);
-    return BlocksToAST.generate(xml, motors, sonars, joysticks);
+    return BlocksToAST.generate(xml, motors, sonars, joysticks, variables);
   }
 
   function refreshWorkspace() {
@@ -2690,22 +2716,14 @@ let UziBlock = (function () {
     because it breaks our code in a couple of places (particularly initBlock), so
     for now this is valid workaround.
     */
-    workspace.getAllBlocks().filter(b => b.type.includes("_call_"))
-      .forEach(b => {
-        b.inputList.filter(i => i.name.startsWith("arg"))
-          .forEach(i => {
-            let scriptName = b.getFieldValue("procName") || b.getFieldValue("funcName");
-            let inputName = i.name;
-            i.fieldRow
-              .filter(f => f.class_ == inputName)
-              .forEach(f => f.setValue(getArgumentName(scriptName, inputName)));
-          });
-      });
+    workspace.getAllBlocks()
+      .filter(b => b.type.includes("_call_"))
+      .forEach(updateArgumentFields);
 
-      if (cleanUp) {
-        workspace.cleanUp();
-        workspace.scrollCenter();
-      }
+    if (cleanUp) {
+      workspace.cleanUp();
+      workspace.scrollCenter();
+    }
   }
 
   function fromXMLText(xml) {
