@@ -6,7 +6,7 @@
 
 class Simulator {
   constructor(){
-     this.pins =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+     this.pins = [0];
      this.globals = {};
      this.scripts = {};
      this.startDate = new Date();
@@ -24,6 +24,10 @@ class Simulator {
      this.lastTickStart = null;
 
      this.expectedBkp = null;
+     for (let index = 0; index < 17; index++) //esta es una solucion hardcodeada, hay que cambiarla cuanto antes
+     {
+        this.pins.push(0);
+     }
    };
 
   updateProgram() {
@@ -32,7 +36,7 @@ class Simulator {
 
   loadProgram(program) {
     this.pc = 0;
-    this.pins=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.pins = [0];
     this.stack = [];
     this.callStack=[];
     this.locals={};
@@ -40,6 +44,10 @@ class Simulator {
     this.loadScripts(program);
     this.startDate = new Date();
     this.currentProgram = program;
+    for (let index = 0; index < 17; index++) 
+    {
+       this.pins.push(0);
+    }
   }
 
   loadGlobals(program){

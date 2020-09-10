@@ -15,21 +15,22 @@ function drawCircles(target,radius, simulator) {
   let x= 0;
   let index = 0;
   for( let i=0;i<simulator.pins.length;i++) {
-    x+=radius*2 + 10;
+    x+=radius*2 - 1;
     let c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     let t = document.createElementNS('http://www.w3.org/2000/svg', 'text'); 
-    c.setAttribute("cx", x );
+    c.setAttribute("cx", x - radius);
     c.setAttribute("cy", radius);
-    c.setAttribute("r", radius);
-    t.setAttribute("x", x - radius);
+    c.setAttribute("r", radius - 5);
+    t.setAttribute("x", x - radius - radius/2);
     t.setAttribute("y",(radius + 40));
-    t.setAttribute( "font-size", "25");
+    t.setAttribute( "font-size", "15");
     t.setAttribute("font-family", "sans-serif");
     t.setAttribute( "width", "50");
     t.setAttribute("height", "50");
     t.textContent = "D" + index++;
     t.setAttribute('fill', '#000');
     t.setAttribute("viewBox", "0 0 1000 300");
+    t.setAttribute("unselectable", "on");
     target.appendChild(c);
     target.appendChild(t);
     c.addEventListener("mousedown", function(event){
