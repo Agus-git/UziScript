@@ -20,26 +20,29 @@
   <script>
     
   var svg = document.getElementById("svg");
-  var sim = new Simulator();
+  var sim;
   var g = ctorGraphics();
 
   $(document).ready(function () {
     Uzi.start().then(() => {
-      console.log("Uzi started successfully!");
+      console.log("Uzi started successfully!");  
+      sim = new Simulator();
       sim.updateProgram();
-    });
     g.drawCircles(svg,20,sim);
     g.createPins(sim);
     g.createStackTable();
+    });
   });
   </script>
   <script>
     function start(){
+      if(!sim) return;
       sim.startProgram(750);
       g.showStats(sim,svg);
     }
     function updateSpeed(value){
       g.displaySpeed(value);
+      if(!sim) return;
       sim.stopProgram();
       sim.startProgram(value);
     }

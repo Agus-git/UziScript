@@ -24,7 +24,7 @@ class Simulator {
      this.lastTickStart = null;
 
      this.expectedBkp = null;
-     for (let index = 0; index < 17; index++) //esta es una solucion hardcodeada, hay que cambiarla cuanto antes
+     for (let index = 0; index < Uzi.state.pins.available.length; index++)
      {
         this.pins.push(0);
      }
@@ -44,7 +44,7 @@ class Simulator {
     this.loadScripts(program);
     this.startDate = new Date();
     this.currentProgram = program;
-    for (let index = 0; index < 17; index++) 
+    for (let index = 0; index < Uzi.state.pins.available.length; index++) 
     {
        this.pins.push(0);
     }
