@@ -9,43 +9,58 @@ function ctorGraphics()
   };
   return graphics;
 }
-
+var colores = ["#000000","#0a2201", "#0c2802", "#154903","#1d6405", "#1d6504", "#288a05","#31a308", "#3acc06", "#3fe404"];
 function drawCircles(target,radius, simulator) {
   target.innerHTML="";
-  let x= 0;
+  radius = radius -2;
+  let x= radius;
   let index = 0;
   for( let i=0;i<simulator.pins.length;i++) {
-    x+=radius*2 + 10;
+    
     let c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     let t = document.createElementNS('http://www.w3.org/2000/svg', 'text'); 
-    c.setAttribute("cx", x );
+    c.setAttribute("cx", x);
     c.setAttribute("cy", radius);
     c.setAttribute("r", radius);
-    t.setAttribute("x", x - radius);
+    t.setAttribute("x", x - radius/2);
     t.setAttribute("y",(radius + 40));
-    t.setAttribute( "font-size", "25");
+    t.setAttribute( "font-size", "15");
     t.setAttribute("font-family", "sans-serif");
     t.setAttribute( "width", "50");
     t.setAttribute("height", "50");
     t.textContent = "D" + index++;
     t.setAttribute('fill', '#000');
     t.setAttribute("viewBox", "0 0 1000 300");
+    t.setAttribute("unselectable", "on");
     target.appendChild(c);
     target.appendChild(t);
-    c.addEventListener("mousedown", function(event){
+    /*c.addEventListener("mousedown", function(event){//            ¿Esto es util? ¿porque?
       if(simulator.pins[i]==0){
         simulator.pins[i]=1;
       } else{
         simulator.pins[i]=0;
-      }
-    });
+      }});*/
     setInterval(() => {
-      if(simulator.pins[i]>=0.5) {
-          c.setAttribute("fill", "#a6e369");
-      } else{
-          c.setAttribute("fill", "#0e141b");
+
+      for (let index = 0; index < 10; index++) 
+      {
+        if (simulator.pins[i] <= index / 10) 
+        {
+          c.setAttribute("fill", colores[index]);
+          index = 11;
+        }
       }
+      if (simulator.pins[i] >= 1) {
+        c.setAttribute("fill", "#44ef08");
+      }
+      
+      /*if(simulator.pins[i]>=0.5) {
+          c.setAttribute("fill", "green");
+      } else{
+          c.setAttribute("fill", "black");
+      }*/
     }, 1);
+    x+= radius + radius + 1;
   }
 }
 
