@@ -4,12 +4,14 @@
     <link rel="stylesheet" type="text/css" href=simulator.css>
   </head>
 <body>
+  <div id="Holador"></div>
   <div class="buttons">
     <button onclick="start()" id="start-button" type="button" class="button">Start</button>
     <button onclick="sim.updateProgram();" id="update-button" type="button" class="button">Update</button>
     <!-- <button onclick="sim.execute()" id="next-button" type="button" class="button">Next Instruction</button> -->
     <button onclick="sim.stopProgram()" id="stop-button" type="button" class="button">Stop</button>
   </div>
+
 
   <svg width="700" height="500" id="svg" x="200" y="100" ></svg>> </svg>
   <script src="libs/jquery/jquery-1.12.4.min.js" type="text/javascript"></script>
@@ -69,7 +71,12 @@
     <h1 id="pc" class="texts">PC</h1>
   </div>
   
-  
+  <!-- Nota: cuando se despliegue, reemplazar "development.js" con "production.min.js". -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>  
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <!-- Cargamos nuestro componente de React. -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="Saludador.js" type="text/babel"></script>
   
 </body>
 </html>
