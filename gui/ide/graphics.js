@@ -2,7 +2,6 @@ function ctorGraphics()
 {
   let graphics = {
     drawCircles: drawCircles,
-    createPins: createPins,
     showStats: showStats,
     createStackTable: createStackTable,
     displaySpeed: displaySpeed
@@ -160,7 +159,6 @@ function showStats(sim,target){
   setInterval(() => {
     showGlobals(sim);
     updateStack(sim);
-    updatePins(sim);
     showPc(sim);
     updatePath();
     }, 1);
@@ -209,24 +207,6 @@ function createStackTable(){
   for(let i=0;i<5;i++){
     var row = table.insertRow(0);
     var cell= row.insertCell(0);
-  }
-}
-
-function createPins(simulator){
-  var table = document.getElementById("pinsTable");
-  for(let i=simulator.pins.length -1;i>=0;i--){
-    var row = table.insertRow(0);
-    var cell1= row.insertCell(0);
-    var cell2= row.insertCell(1);
-    cell1.textContent = 'Pin ' + i;
-    cell2.textContent = simulator.pins[i];
-  }
-}
-
-function updatePins(simulator){
-  var table = document.getElementById("pinsTable");
-  for(let i=simulator.pins.length -1;i>=0;i--){
-    table.rows[i].cells[1].textContent= simulator.pins[i];
   }
 }
 
