@@ -1,10 +1,17 @@
 "use strict"
+function noesunacopiaSimulator()
+{
+  let graphics = {
+    Pins: Pins
+  };
+  return graphics;
+}
 const test = (
 <table className="table table-sm table-dark">
 <thead>
   <tr>
     <th scope="col">#</th>
-    <th scope="col">First</th>
+    <th scope="col">Estado</th>
     <th scope="col">Last</th>
     <th scope="col">Handle</th>
   </tr>
@@ -24,10 +31,34 @@ const test = (
   </tr>
   <tr>
     <th scope="row">3</th>
-    <td colspan="2">Larry the Bird</td>
+    <td colSpan="2">Larry the Bird</td>
     <td>@twitter</td>
   </tr>
 </tbody>
 </table>);
+function Pins(props)
+{
+  Informacion = props.pins.map((item, index) => { return (
+    <tr>
+      <th scope = "row">{index}</th>
+      <td>{item > 0}</td>
+      <td>{item}</td>
+    </tr>
+  )})
+  return(
+    <table className = "table table-striped table-dark">
+      <thead>
+        <tr>
+          <th scope = "col">#</th>
+          <th scope = "col">Estado</th>
+          <th scope = "col">Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        {Informacion}
+      </tbody>
+    </table>
+  );
+}
 const domContainer = document.querySelector("#pinsTable");
-reactDOM.render(test,domContainer);
+ReactDOM.render(Pins,domContainer);

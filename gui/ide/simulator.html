@@ -19,11 +19,13 @@
   <script src="uzi.js" type="text/javascript" ></script>
   <script src="simulator.js" type="text/javascript"></script>
   <script src="graphics.js" type="text/javascript" ></script>
+  <script src="simulatorUI.js" type="text/babel"></script>
   <script>
     
   var svg = document.getElementById("svg");
   var sim;
   var g = ctorGraphics();
+  var s = noesunacopiaSimulator();
 
   $(document).ready(function () {
     Uzi.start().then(() => {
@@ -32,6 +34,7 @@
       sim.updateProgram();
     g.drawCircles(svg,20,sim);
     g.createStackTable();
+    s.Pins(sim);
     });
   });
   </script>
@@ -55,9 +58,7 @@
       <caption>Globals</caption>
     </table>
 
-    <table id="pinsTable" class="pins">
-      <caption>Pins</caption>
-    </table>
+    <div id="pinsTable"></div>
 
     <div>
       <h1  class="texts">Simulator Speed</h1>
