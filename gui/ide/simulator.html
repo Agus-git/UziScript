@@ -13,28 +13,31 @@
   </div>
 
 
-  <svg width="700" height="500" id="svg" x="200" y="100" ></svg>> </svg>
+  <svg width="700" height="500" id="svg" x="200" y="100" ></svg> </svg>
   <script src="libs/jquery/jquery-1.12.4.min.js" type="text/javascript"></script>
   <script src="ajax.js" type="text/javascript"></script>
   <script src="uzi.js" type="text/javascript" ></script>
   <script src="simulator.js" type="text/javascript"></script>
   <script src="graphics.js" type="text/javascript" ></script>
   <script src="simulatorUI.js" type="text/babel"></script>
-  <script>
+  <script type="text/babel">
     
   var svg = document.getElementById("svg");
   var sim;
   var g = ctorGraphics();
-  var s = noesunacopiaSimulator();
 
   $(document).ready(function () {
     Uzi.start().then(() => {
       console.log("Uzi started successfully!");  
       sim = new Simulator();
-      sim.updateProgram();
+      sim.updateProgram(); 
     g.drawCircles(svg,20,sim);
     g.createStackTable();
-    s.Pins(sim);
+    console.log("Estoy");
+    var save = window.Pins(sim);
+    
+const domContainer = document.querySelector("#pinsTable");
+ReactDOM.render(save,domContainer);
     });
   });
   </script>
