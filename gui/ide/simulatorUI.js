@@ -1,15 +1,27 @@
 "use strict"
-function noesunacopiaSimulator()
+class TablaDePins
 {
-  let graphics = {
-    Pins: Pins
-  };
-  return graphics;
+  constructor(props)
+  {
+    this.pins = props.pins;
+    this.Pins = Pins.bind(this);
+    this.Imprimir();
+  }
+  Actualizar(props)
+  {
+    this.pins = props.pins;
+    this.Imprimir();
+  }
+  Imprimir()
+  {
+    const domContainer = document.querySelector("#pinsTable");
+    ReactDOM.render(Pins(this.pins),domContainer);
+  }
 }
 
 function Pins(props)
 {
-  var Informacion = props.pins.map((item, index) => { return (
+  var Informacion = props.map((item, index) => { return (
     <tr>
       <th scope = "row">{index}</th>
       <td>{(item > 0).toString()}</td>

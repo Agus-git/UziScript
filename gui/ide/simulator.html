@@ -24,6 +24,7 @@
     
   var svg = document.getElementById("svg");
   var sim;
+  var reactPin;
   var g = ctorGraphics();
 
   $(document).ready(function () {
@@ -34,10 +35,7 @@
     g.drawCircles(svg,20,sim);
     g.createStackTable();
     console.log("Estoy");
-    var save = window.Pins(sim);
-    
-const domContainer = document.querySelector("#pinsTable");
-ReactDOM.render(save,domContainer);
+    reactPin = new TablaDePins(sim);
     });
   });
   </script>
