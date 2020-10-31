@@ -5,17 +5,16 @@ class TablaDePins
   {
     this.pins = props.pins;
     this.Pins = Pins.bind(this);
-    this.Imprimir();
+    this.paint(this.pins);
   }
-  Actualizar(props)
+  update(props)
   {
-    this.pins = props.pins;
-    this.Imprimir();
+    this.paint(props.pins);
   }
-  Imprimir()
+  paint(props)
   {
     const domContainer = document.querySelector("#pinsTable");
-    ReactDOM.render(Pins(this.pins),domContainer);
+    ReactDOM.render(Pins(props),domContainer);
   }
 }
 
